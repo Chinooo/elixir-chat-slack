@@ -1,6 +1,6 @@
-defmodule ChatWeb.UserView do
-  use ChatWeb, :view
-  alias ChatWeb.UserView
+defmodule Chat.UserView do
+  use Chat.Web, :view
+  alias Chat.UserView
 
   def render("index.json", %{users: users}) do
     %{data: render_many(users, UserView, "user.json")}

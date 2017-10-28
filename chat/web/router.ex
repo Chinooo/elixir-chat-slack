@@ -5,7 +5,13 @@ defmodule Chat.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", Chat do
+  scope "/", Chat do
     pipe_through :api
+    post "/sessions", SessionController, :create
+    delete "/sessions", SessionController, :delete
+    post "/sessions/refresh", SessionController, :refresh
+    resources "/users", UserController, except: [:edit]
+    resources "/rooms", RoomController, except: [:new, :edit]
+    resources "/user_rooms", UserRoomController, except: [:new, :edit]
   end
 end

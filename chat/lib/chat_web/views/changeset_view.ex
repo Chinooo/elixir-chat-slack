@@ -1,5 +1,5 @@
-defmodule ChatWeb.ChangesetView do
-  use ChatWeb, :view
+defmodule Chat.ChangesetView do
+  use Chat.Web, :view
 
   @doc """
   Traverses and translates changeset errors.

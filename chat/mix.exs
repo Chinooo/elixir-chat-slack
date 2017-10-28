@@ -37,6 +37,10 @@ defmodule Chat.Mixfile do
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.2"},
       {:postgrex, ">= 0.0.0"},
+      {:comeonin, "~> 4.0"},
+      {:bcrypt_elixir, "~> 1.0"},
+      {:guardian, "~> 0.14"},
+      {:cors_plug, "~> 1.1"},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"}
     ]

@@ -1,10 +1,10 @@
-defmodule ChatWeb.UserController do
-  use ChatWeb, :controller
+defmodule Chat.UserController do
+  use Chat.Web, :controller
 
   alias Chat.Accounts
   alias Chat.Accounts.User
 
-  action_fallback ChatWeb.FallbackController
+  action_fallback Chat.FallbackController
 
   def index(conn, _params) do
     users = Accounts.list_users()

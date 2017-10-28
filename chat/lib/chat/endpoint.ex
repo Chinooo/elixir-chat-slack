@@ -36,5 +36,7 @@ defmodule Chat.Endpoint do
     key: "_chat_key",
     signing_salt: "SNF+b+CA"
 
+  plug CORSPlug
+
   plug Chat.Router
 end
