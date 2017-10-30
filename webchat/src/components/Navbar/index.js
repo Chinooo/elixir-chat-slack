@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 
 const Navbar = () =>
   <nav className={css(styles.navbar)}>
-    <Link to="/" className={css(styles.link)}>Sling</Link>
+    <Link to="/" className={css(styles.link)}>WeIt</Link>
   </nav>;
 
 export default Navbar;
