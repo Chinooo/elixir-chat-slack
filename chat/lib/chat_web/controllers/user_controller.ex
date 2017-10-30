@@ -5,6 +5,7 @@ defmodule Chat.UserController do
   alias Chat.Accounts.User
 
   action_fallback Chat.FallbackController
+  plug Guardian.Plug.EnsureAuthenticated, [handler: Chat.SessionController] when action in [:rooms]
 
   def index(conn, _params) do
     users = Accounts.list_users()
@@ -31,6 +32,12 @@ defmodule Chat.UserController do
     with {:ok, %User{} = user} <- Accounts.update_user(user, user_params) do
       render(conn, "show.json", user: user)
     end
+  end
+
+  def rooms(conn, _params) do
+    current_user = Guardian.Plug.current_resource(conn)
+    rooms = Repo.all(assoc(current_user, :rooms))
+    render(conn, Chat.RoomView, "index.json", %{rooms: rooms})
   end
 
   def delete(conn, %{"id" => id}) do

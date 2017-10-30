@@ -11,7 +11,8 @@ defmodule Chat.Router do
     delete "/sessions", SessionController, :delete
     post "/sessions/refresh", SessionController, :refresh
     resources "/users", UserController, except: [:edit]
-    resources "/rooms", RoomController, except: [:new, :edit]
-    resources "/user_rooms", UserRoomController, except: [:new, :edit]
+    get "/users/:id/rooms", UserController, :rooms
+    resources "/rooms", RoomController, only: [:index, :create]
+    post "/rooms/:id/join", RoomController, :join
   end
 end
