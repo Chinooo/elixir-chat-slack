@@ -14,5 +14,6 @@ defmodule Chat.Router do
     get "/users/:id/rooms", UserController, :rooms
     resources "/rooms", RoomController, only: [:index, :create]
     post "/rooms/:id/join", RoomController, :join
+    resources "/messages", MessageController, except: [:new, :edit]
   end
 end

@@ -9,12 +9,12 @@ defmodule Chat.FallbackController do
   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
     conn
     |> put_status(:unprocessable_entity)
-    |> render(ChatWeb.ChangesetView, "error.json", changeset: changeset)
+    |> render(Chat.ChangesetView, "error.json", changeset: changeset)
   end
 
   def call(conn, {:error, :not_found}) do
     conn
     |> put_status(:not_found)
-    |> render(ChatWeb.ErrorView, :"404")
+    |> render(Chat.ErrorView, :"404")
   end
 end
