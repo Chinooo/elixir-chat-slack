@@ -5,7 +5,7 @@ defmodule Chat.RoomController do
   alias Chat.Accounts.Room
 
   action_fallback Chat.FallbackController
-  plug Guardian.Plug.EnsureAuthenticated, handler: Sling.SessionController
+  plug Guardian.Plug.EnsureAuthenticated, handler: Chat.SessionController
 
     def index(conn, _params) do
       rooms = Repo.all(Room)

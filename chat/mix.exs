@@ -42,6 +42,7 @@ defmodule Chat.Mixfile do
       {:guardian, "~> 0.14"},
       {:cors_plug, "~> 1.1"},
       {:gettext, "~> 0.11"},
+      {:scrivener_ecto, "~> 1.0"},
       {:cowboy, "~> 1.0"}
     ]
   end

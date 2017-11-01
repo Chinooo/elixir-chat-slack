@@ -5,11 +5,27 @@ defmodule Chat.MessageController do
   alias Chat.Accounts.Message
 
   action_fallback Chat.FallbackController
+  plug Guardian.Plug.EnsureAuthenticated, handler: Chat.SessionController
 
-  def index(conn, _params) do
-    messages = Accounts.list_messages()
-    render(conn, "index.json", messages: messages)
-  end
+  # def index(conn, _params) do
+  #   messages = Accounts.list_messages()
+  #   render(conn, "index.json", messages: messages)
+  # end
+
+  def index(conn, params) do
+  last_seen_id = params["last_seen_id"] || 0
+  room = Repo.get!(Chat.Room, params["room_id"])
+
+  page =
+    Chat.Accounts.Message
+    |> where([m], m.room_id == ^room.id)
+    |> where([m], m.id < ^last_seen_id)
+    |> order_by([desc: :inserted_at, desc: :id])
+    |> preload(:user)
+    |> Chat.Repo.paginate()
+
+  render(conn, "index.json", %{messages: page.entries, pagination: Chat.PaginationHelpers.pagination(page)})
+end
 
   def create(conn, %{"message" => message_params}) do
     with {:ok, %Message{} = message} <- Accounts.create_message(message_params) do

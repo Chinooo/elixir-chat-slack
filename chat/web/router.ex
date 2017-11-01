@@ -12,8 +12,11 @@ defmodule Chat.Router do
     post "/sessions/refresh", SessionController, :refresh
     resources "/users", UserController, except: [:edit]
     get "/users/:id/rooms", UserController, :rooms
-    resources "/rooms", RoomController, only: [:index, :create]
+    resources "/rooms", RoomController, only: [:index, :create] do
+      resources "/messages", MessageController, only: [:index]
+    end
     post "/rooms/:id/join", RoomController, :join
     resources "/messages", MessageController, except: [:new, :edit]
+
   end
 end
